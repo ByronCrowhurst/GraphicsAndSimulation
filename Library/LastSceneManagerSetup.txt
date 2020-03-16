@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Byrons_Shader_Tester.unity
+- path: Assets/Scenes/Fireball.unity
   isLoaded: 1
   isActive: 1
