@@ -5,8 +5,18 @@ using UnityEngine;
 public class Sphere : MonoBehaviour
 {
     [Range(2, 256)] public int resolution = 10;
+    [SerializeField] float scale;
     [SerializeField, HideInInspector] MeshFilter[] meshFilters;
+    [SerializeField] List<Material> materials = new List<Material>();
+    [SerializeField] float rampValue;
+    [SerializeField] float amplitudeValue;
     SphereFace[] faces;
+
+    void Start()
+    {
+        Initialize();
+        GenerateMesh();
+    }
 
     private void OnValidate()
     {
@@ -33,11 +43,13 @@ public class Sphere : MonoBehaviour
                 GameObject meshObj = new GameObject("mesh");
                 meshObj.transform.parent = transform;
 
-                meshObj.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Custom/Fireball"));
+                Material whateverYouWant = new Material(Shader.Find("Custom/Fireball"));
+                meshObj.AddComponent<MeshRenderer>().sharedMaterial = whateverYouWant;
+                whateverYouWant.SetFloat("_RampVal", rampValue);
+                whateverYouWant.SetFloat("_Amplitude", amplitudeValue);
                 meshFilters[i] = meshObj.AddComponent<MeshFilter>();
+                materials.Add(whateverYouWant);
                 meshFilters[i].sharedMesh = new Mesh();
-
-
             }
             faces[i] = new SphereFace(meshFilters[i].sharedMesh, resolution, directions[i]);
         }
