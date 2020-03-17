@@ -38,7 +38,7 @@
 			void vert(inout appdata_full v)
 			{
 				half noiseVal = tex2Dlod(_NoiseTex, float4(v.texcoord.xy, 0, 0)).rrr;
-				v.vertex.y += v.normal * sin(_Time.w + noiseVal * 100) * _Amplitude;
+				v.vertex.xyz += v.normal * sin(_Time.w + noiseVal * 100) * _Amplitude;
 				//v.vertex.y += sin(v.vertex.x);
 			}
 

@@ -24,8 +24,10 @@ public class SphereFace
     public void CreateMesh()
     {
         Vector3[] verts = new Vector3[resolution * resolution];
+        Vector2[] uvs = new Vector2[resolution * resolution];
         int[] tri = new int[(resolution - 1) * (resolution - 1) * 6];
         int triIndex = 0;
+
 
         for (int y = 0; y < resolution; y++)
         {
@@ -35,7 +37,10 @@ public class SphereFace
                 Vector2 percent = new Vector2(x, y) / (resolution - 1);
                 Vector3 pointOnCube = up + (percent.x - 0.5f) * 2 * axisA + (percent.y - 0.5f) * 2 * axisB;
                 Vector3 pointOnSphere = pointOnCube.normalized;
+                
+
                 verts[iter] = pointOnSphere;
+
                 if (x != resolution - 1 && y != resolution - 1)
                 {
                     tri[triIndex] = iter;
@@ -47,11 +52,15 @@ public class SphereFace
                     tri[triIndex + 5] = iter + resolution + 1;
                     triIndex += 6;
                 }
+
+                uvs[iter] = new Vector2((float)x / (float)resolution, (float)y / (float)resolution);
+
             }
         }
         mesh.Clear();
         mesh.vertices = verts;
         mesh.triangles = tri;
+        mesh.uv = uvs;
         mesh.RecalculateNormals();
     }
 }
