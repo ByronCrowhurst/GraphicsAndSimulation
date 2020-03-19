@@ -5,7 +5,7 @@
 		_RampTex("Ramp texture", 2D) = "white"{}
 		_NoiseTex("Noise texture", 2D) = "grey" {}
 		_RampVal("Ramp offset", Range(-0.5, 0.5)) = 0
-		_Amplitude("Amplitude factor", Range(0, 0.3)) = 0.1
+		_Amplitude("Amplitude factor", float) = 0.1
 	}
 		SubShader
 		{
